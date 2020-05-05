@@ -20,8 +20,8 @@ namespace rppoonlv5
             //dataConsolePrinter.Log(protectionProxyDataset);
 
             //četvrti
-            ProxyConsoleLogger proxyConsoleLogger = new ProxyConsoleLogger("csvfile.txt");
-            proxyConsoleLogger.log(proxyConsoleLogger);
+            ProxyConsoleLogger proxyConsoleLogger = new ProxyConsoleLogger(User.GenerateUser("Teemo"));
+            proxyConsoleLogger.GetData();
 
             //peti
             //ReminderNote note = new ReminderNote("Pozdrav",new DarkTheme());

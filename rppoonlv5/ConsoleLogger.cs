@@ -17,10 +17,9 @@ namespace rppoonlv5
             }
             return instance;
         }
-        public ReadOnlyCollection<List<string>> Log(ProxyConsoleLogger proxyConsoleLogger)
+        public void log(string message)
         {
-            ReadOnlyCollection<List<string>> data = proxyConsoleLogger.GetData();
-            return data;
+            Console.WriteLine(message);
         }
     }
 }

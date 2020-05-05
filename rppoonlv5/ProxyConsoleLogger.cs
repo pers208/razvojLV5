@@ -7,29 +7,34 @@ using System.Threading.Tasks;
 
 namespace rppoonlv5
 {
-    class ProxyConsoleLogger
-    {
-        List<string> data;
-        private string filePath="csvfile.txt";
+    class ProxyConsoleLogger:IDataset
+    {   
         private Dataset dataset;
-        public ProxyConsoleLogger(string filePath)
+        private List<int> allowedIDs;
+        public User user { private get; set; }
+        public ProxyConsoleLogger(User user)
         {
-            this.filePath = filePath;
+            this.allowedIDs = new List<int>(new int[] { 0, 1 });
+            this.user = user;
+        }
+        private bool AuthenticateUser()
+        {
+            return allowedIDs.Contains(this.user.ID);
         }
         public ReadOnlyCollection<List<string>> GetData()
         {
-            if (dataset == null)
+            ConsoleLogger.GetInstance().log("Time accessed: "+ DateTime.Now.ToString());
+            if (this.AuthenticateUser())
             {
-                dataset = new Dataset(filePath);
+                if (this.dataset == null)
+                {
+                    this.dataset = new Dataset("csvfile.txt");
+                }
+                ConsoleLogger.GetInstance().log("Hello "+user.Name);
+                return this.dataset.GetData();
             }
-
-            data.Add("Data accessed : " + DateTime.Now.ToString());
-
-            return dataset.GetData();
-        }
-        public void log(ProxyConsoleLogger proxyConsoleLogger)
-        {
-            Console.WriteLine(ConsoleLogger.GetInstance().Log(proxyConsoleLogger));
+            ConsoleLogger.GetInstance().log("Acces denied!");
+            return null;
         }
     }
 }
