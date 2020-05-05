@@ -33,7 +33,7 @@ namespace rppoonlv5
                 ConsoleLogger.GetInstance().log("Hello "+user.Name);
                 return this.dataset.GetData();
             }
-            ConsoleLogger.GetInstance().log("Acces denied!");
+            ConsoleLogger.GetInstance().log("Access denied!");
             return null;
         }
     }
